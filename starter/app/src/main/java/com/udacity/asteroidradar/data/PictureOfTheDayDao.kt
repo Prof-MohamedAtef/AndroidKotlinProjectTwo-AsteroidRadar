@@ -7,11 +7,10 @@ import androidx.room.Query
 import com.udacity.asteroidradar.data.models.PictureOfDay
 
 @Dao
-interface PictureOfTheDay {
+interface PictureOfTheDayDao {
     @Query("SELECT * FROM TblImages ORDER BY date DESC LIMIT 1")
     suspend fun getLastlyDownloadedImage(): PictureOfDay
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPictureOfDay(imageOfTheDay: PictureOfDay)
-
 }
