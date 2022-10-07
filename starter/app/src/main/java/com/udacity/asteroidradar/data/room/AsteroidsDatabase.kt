@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.data
+package com.udacity.asteroidradar.data.room
 
 import android.content.Context
 import androidx.room.Database
@@ -10,13 +10,13 @@ import com.udacity.asteroidradar.data.models.PictureOfDay
 @Database(entities = [PictureOfDay::class, Asteroid::class], version = 1, exportSchema = false)
 abstract class AsteroidsDatabase : RoomDatabase() {
     abstract val asteroidsDao: AsteroidsDao
-    abstract val pictureOfDay: PictureOfTheDayDao
+    abstract val pictureOfDayDao: PictureOfTheDayDao
     companion object{
 
         @Volatile
-        private var INSTANCE:AsteroidsDatabase? = null
+        private var INSTANCE: AsteroidsDatabase? = null
 
-        fun getInstance(context: Context):AsteroidsDatabase{
+        fun getInstance(context: Context): AsteroidsDatabase {
             synchronized(this){
                 var instance= INSTANCE
                 if (instance==null){
@@ -27,7 +27,7 @@ abstract class AsteroidsDatabase : RoomDatabase() {
                     )
                         .fallbackToDestructiveMigration()
                         .build()
-                    INSTANCE=instance
+                    INSTANCE =instance
                 }
                 return instance
             }

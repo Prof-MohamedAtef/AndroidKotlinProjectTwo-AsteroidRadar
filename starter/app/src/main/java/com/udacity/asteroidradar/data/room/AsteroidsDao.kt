@@ -1,4 +1,4 @@
-package com.udacity.asteroidradar.data
+package com.udacity.asteroidradar.data.room
 
 import androidx.room.Dao
 import androidx.room.Insert
