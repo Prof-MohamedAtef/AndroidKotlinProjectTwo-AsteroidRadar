@@ -1,12 +1,10 @@
 package com.udacity.asteroidradar.data
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.udacity.asteroidradar.BuildConfig
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
-import com.udacity.asteroidradar.data.models.Asteroid
-import com.udacity.asteroidradar.data.models.PictureOfDay
+import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.retrofit.AsteroidsWebService
 import com.udacity.asteroidradar.data.room.AsteroidsDatabase
 import com.udacity.asteroidradar.util.DateBuilder.Companion.sevenDaysLater
@@ -55,7 +53,7 @@ class MainRepository (private val asteroidsDatabase: AsteroidsDatabase){
         return asteroidsDatabase.asteroidsDao.deleteAsteroidsBeforeToday(today)
     }
 
-    suspend fun getRecentNasaPicDayFromDB():PictureOfDay{
+    suspend fun getRecentNasaPicDayFromDB(): PictureOfDay {
         return asteroidsDatabase.pictureOfDayDao.getLastlyDownloadedImage()
     }
 }

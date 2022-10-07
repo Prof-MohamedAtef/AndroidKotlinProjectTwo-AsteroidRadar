@@ -4,14 +4,12 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 import com.udacity.asteroidradar.util.LoadingStatus
-import kotlinx.android.synthetic.main.fragment_main.view.*
 
 class MainFragment : Fragment() {
 
@@ -19,7 +17,7 @@ class MainFragment : Fragment() {
     private lateinit var binding: FragmentMainBinding
 
     private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
+        ViewModelProvider(this, ViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
     }
 
 

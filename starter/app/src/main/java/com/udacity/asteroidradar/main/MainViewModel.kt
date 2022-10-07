@@ -7,8 +7,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.udacity.asteroidradar.data.MainRepository
-import com.udacity.asteroidradar.data.models.Asteroid
-import com.udacity.asteroidradar.data.models.PictureOfDay
+import com.udacity.asteroidradar.Asteroid
+import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.data.room.AsteroidsDatabase
 import com.udacity.asteroidradar.util.LoadingStatus
 import kotlinx.coroutines.launch
@@ -28,6 +28,7 @@ class MainViewModel(application: Application) : ViewModel() {
 
     private val databaseInstance= AsteroidsDatabase.getDatabaseInstance(application)
     private val repository=MainRepository(databaseInstance)
+
 
     init {
         callApi()
