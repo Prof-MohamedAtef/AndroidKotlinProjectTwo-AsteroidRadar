@@ -10,6 +10,7 @@ import com.udacity.asteroidradar.data.MainRepository
 import com.udacity.asteroidradar.data.models.Asteroid
 import com.udacity.asteroidradar.data.models.PictureOfDay
 import com.udacity.asteroidradar.data.room.AsteroidsDatabase
+import com.udacity.asteroidradar.util.LoadingStatus
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : ViewModel() {
@@ -21,6 +22,10 @@ class MainViewModel(application: Application) : ViewModel() {
     val picOfDay:LiveData<List<PictureOfDay>>
         get() = _picOfDay
 
+    private val _loadingStatus=MutableLiveData<LoadingStatus>()
+    val loadingStatus:LiveData<LoadingStatus>
+        get() = _loadingStatus
+
     private val databaseInstance= AsteroidsDatabase.getDatabaseInstance(application)
     private val repository=MainRepository(databaseInstance)
 
@@ -31,14 +36,19 @@ class MainViewModel(application: Application) : ViewModel() {
     private fun callApi() {
         try {
             viewModelScope.launch {
+                _loadingStatus.value=LoadingStatus.LOADING
                 repository.callAsteroidsApi()
                 _asteroidsResponse.value=repository.returnAsteroidsFromDB()
                 _picOfDay.value= listOf(repository.getRecentNasaPicDayFromDB())
+                if (asteroidResponse.value?.isEmpty()==true || picOfDay.value?.isEmpty()==true){
+                    _loadingStatus.value=LoadingStatus.ERROR
+                }else{
+                    _loadingStatus.value=LoadingStatus.DONE
+                }
             }
         }catch (exception: Exception){
+            _loadingStatus.value=LoadingStatus.ERROR
             Log.e("ViewModel Exception :","Exception in ViewModel")
         }
     }
-
-
 }
