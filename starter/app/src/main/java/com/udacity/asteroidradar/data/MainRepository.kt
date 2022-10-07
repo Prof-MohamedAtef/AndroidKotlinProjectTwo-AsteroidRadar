@@ -7,19 +7,16 @@ import com.udacity.asteroidradar.BuildConfig
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
 import com.udacity.asteroidradar.data.models.Asteroid
 import com.udacity.asteroidradar.data.models.PictureOfDay
-import com.udacity.asteroidradar.retrofit.ApiCall
 import com.udacity.asteroidradar.retrofit.AsteroidsWebService
 import com.udacity.asteroidradar.data.room.AsteroidsDatabase
-import com.udacity.asteroidradar.util.DateBuilder
 import com.udacity.asteroidradar.util.DateBuilder.Companion.sevenDaysLater
 import com.udacity.asteroidradar.util.DateBuilder.Companion.today
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
-import java.time.LocalDate
 
 class MainRepository (private val asteroidsDatabase: AsteroidsDatabase){
-    @RequiresApi(Build.VERSION_CODES.O)
+
     suspend fun callAsteroidsApi(){
         try {
             withContext(Dispatchers.IO){
@@ -58,7 +55,7 @@ class MainRepository (private val asteroidsDatabase: AsteroidsDatabase){
         return asteroidsDatabase.asteroidsDao.deleteAsteroidsBeforeToday(today)
     }
 
-    suspend fun getRecentNasaPicDay():PictureOfDay{
+    suspend fun getRecentNasaPicDayFromDB():PictureOfDay{
         return asteroidsDatabase.pictureOfDayDao.getLastlyDownloadedImage()
     }
 }
