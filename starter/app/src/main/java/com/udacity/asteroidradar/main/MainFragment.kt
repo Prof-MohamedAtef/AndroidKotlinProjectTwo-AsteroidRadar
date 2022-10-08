@@ -7,11 +7,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.squareup.picasso.Picasso
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.PictureOfDay
 import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.adapter.AsteroidsRecyclerAdapter
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 import com.udacity.asteroidradar.util.LoadingStatus
+import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
 
@@ -31,6 +36,10 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
         binding.statusLoadingWheel.setBackgroundColor(Color.BLACK)
+
+        binding.asteroidRecycler.adapter=AsteroidsRecyclerAdapter(AsteroidsRecyclerAdapter.RecyclerClickListener{
+            findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
+        },null)
 
         setHasOptionsMenu(true)
 
@@ -61,11 +70,16 @@ class MainFragment : Fragment() {
     }
 
     private fun showImageOfDay(picOfDayList: List<PictureOfDay>?) {
-        TODO("Not yet implemented")
+        Picasso.with(requireContext()).load(picOfDayList?.get(0)?.url).placeholder(R.drawable.placeholder_picture_of_day).into(binding.activityMainImageOfTheDay)
+        binding.textView.setText(picOfDayList?.get(0)?.title)
     }
 
     private fun populateRecyclerView(asteroidsList: List<Asteroid>?) {
-
+        binding.asteroidRecycler.adapter= asteroidsList?.let {
+            AsteroidsRecyclerAdapter(AsteroidsRecyclerAdapter.RecyclerClickListener{
+                findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
+            }, it)
+        }
     }
 
     fun setProgress(progress: Int){
@@ -78,6 +92,13 @@ class MainFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        viewLifecycleOwner.lifecycleScope.launch {
+            when(item.itemId){
+                R.id.view_week_asteroids -> viewModel.returnWeekData()
+                R.id.view_today_asteroids -> viewModel.returnTodayData()
+                R.id.view_saved_asteroids -> viewModel.returnSavedAsteroids()
+            }
+        }
         return true
     }
 }

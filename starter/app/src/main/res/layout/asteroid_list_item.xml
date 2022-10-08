@@ -1,37 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="#000"
-    android:padding="20dp">
-    <TextView
-        android:id="@+id/tvCodeName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="68347 (2001 KB67)"
-        android:textColor="#FFF"
-        android:textStyle="bold"
-        android:textSize="20sp"/>
-    <TextView
-        android:id="@+id/tvDate"
-        android:layout_marginTop="15dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tvCodeName"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="2020-02-08"
-        android:textColor="#F2F2F2"
-        android:textSize="18sp"/>
-    <View
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#F2F2F2"
-        app:layout_constraintTop_toBottomOf="@+id/tvDate"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+        <variable
+            name="asteroid"
+            type="com.udacity.asteroidradar.Asteroid" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#000"
+        android:padding="20dp">
+
+        <TextView
+            android:id="@+id/tvCodeName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{asteroid.codename}"
+            android:textColor="#FFF"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tvCodeName"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="@{asteroid.closeApproachDate}"
+            android:textColor="#F2F2F2"
+            android:textSize="18sp" />
+        
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvCodeName"
+            android:src="@drawable/asteroid_hazardous"
+            statusIcon="@{asteroid.potentiallyHazardous}"/>
+
+        <View
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#F2F2F2"
+            app:layout_constraintTop_toBottomOf="@+id/tvDate"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

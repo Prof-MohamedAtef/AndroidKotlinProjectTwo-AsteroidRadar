@@ -39,7 +39,7 @@ class MainViewModel(application: Application) : ViewModel() {
             viewModelScope.launch {
                 _loadingStatus.value=LoadingStatus.LOADING
                 repository.callAsteroidsApi()
-                _asteroidsResponse.value=repository.returnAsteroidsFromDB()
+                _asteroidsResponse.value=repository.selectAsteroidsFromDB()
                 _picOfDay.value= listOf(repository.getRecentNasaPicDayFromDB())
                 if (asteroidResponse.value?.isEmpty()==true || picOfDay.value?.isEmpty()==true){
                     _loadingStatus.value=LoadingStatus.ERROR
@@ -52,4 +52,18 @@ class MainViewModel(application: Application) : ViewModel() {
             Log.e("ViewModel Exception :","Exception in ViewModel")
         }
     }
+
+    suspend fun returnWeekData(){
+        _asteroidsResponse.value=repository.returnNextSevenDaysAsteroidsFromDB()
+    }
+
+    suspend fun returnTodayData(){
+        _asteroidsResponse.value=repository.returnTodayAsteroidsFromDB()
+    }
+
+    suspend fun returnSavedAsteroids(){
+        _asteroidsResponse.value=repository.selectAsteroidsFromDB()
+    }
+
+
 }

@@ -37,7 +37,7 @@ class MainRepository (private val asteroidsDatabase: AsteroidsDatabase){
         }
     }
 
-    suspend fun returnAsteroidsFromDB():List<Asteroid>{
+    suspend fun returnTodayAsteroidsFromDB():List<Asteroid>{
         return asteroidsDatabase.asteroidsDao.getAsteroidsToday(today)
     }
 
