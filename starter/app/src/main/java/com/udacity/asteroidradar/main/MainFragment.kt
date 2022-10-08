@@ -27,7 +27,6 @@ class MainFragment : Fragment() {
         ViewModelProvider(this, ViewModelFactory(requireActivity().application)).get(MainViewModel::class.java)
     }
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentMainBinding.inflate(inflater)
