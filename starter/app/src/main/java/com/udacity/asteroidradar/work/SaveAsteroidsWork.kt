@@ -20,10 +20,11 @@ class SaveAsteroidsWork(context: Context, workerParameters: WorkerParameters) :
 
         return try{
             repository.callAsteroidsApi()
+            // delete asteroids before today
+            repository.removeAsteroidsEarlierThanToday()
             Result.success()
         }catch (exception: HttpException){
             Result.retry()
         }
-
     }
 }

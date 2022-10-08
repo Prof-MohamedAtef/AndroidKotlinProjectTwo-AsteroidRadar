@@ -2,7 +2,9 @@ package com.udacity.asteroidradar.main
 
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,6 +18,7 @@ import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.adapter.AsteroidsRecyclerAdapter
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 import com.udacity.asteroidradar.util.LoadingStatus
+import com.udacity.asteroidradar.util.ProgressBuilder.Companion.showProgress
 import kotlinx.coroutines.launch
 
 class MainFragment : Fragment() {
@@ -50,11 +53,13 @@ class MainFragment : Fragment() {
 
         viewModel.loadingStatus.observe(viewLifecycleOwner, Observer { loadingStatus->
             if (loadingStatus.equals(LoadingStatus.LOADING)){
-                setProgress(0)
+                showProgress(binding)
             }else if (loadingStatus.equals(LoadingStatus.DONE)){
-                setProgress(10)
+                binding.statusLoadingWheel?.visibility = View.INVISIBLE
+                binding.tvProgressValue.visibility=View.INVISIBLE
             }else if (loadingStatus.equals(LoadingStatus.ERROR)){
-                setProgress(10)
+                binding.statusLoadingWheel?.visibility = View.INVISIBLE
+                binding.tvProgressValue.visibility=View.INVISIBLE
                 Toast.makeText(context,"Internet Disabled!", Toast.LENGTH_LONG).show()
             }
         })
@@ -67,6 +72,8 @@ class MainFragment : Fragment() {
             populateRecyclerView(asteroidsList)
         })
     }
+
+
 
     private fun showImageOfDay(picOfDayList: List<PictureOfDay>?) {
         Picasso.with(requireContext()).load(picOfDayList?.get(0)?.url).placeholder(R.drawable.placeholder_picture_of_day).into(binding.activityMainImageOfTheDay)
