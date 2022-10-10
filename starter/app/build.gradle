@@ -10,7 +10,6 @@ localProperties.load(new FileInputStream(localPropertiesFile))
 
 android {
     compileSdkVersion 32
-    buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.udacity.asteroidradar"
         minSdkVersion 21
