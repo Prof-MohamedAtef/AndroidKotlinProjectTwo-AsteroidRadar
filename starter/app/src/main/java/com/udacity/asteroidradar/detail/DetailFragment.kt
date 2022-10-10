@@ -24,6 +24,14 @@ class DetailFragment : Fragment() {
             displayAstronomicalUnitExplanationDialog()
         }
 
+        binding.activityMainImageOfTheDay.contentDescription=context?.getString(R.string.image_of_the_day)
+        binding.closeApproachDateTitle.contentDescription=context?.getString(R.string.close_approach_data_title)
+        binding.absoluteMagnitudeTitle.contentDescription=context?.getString(R.string.absolute_magnitude_title)
+        binding.helpButton.contentDescription=context?.getString(R.string.help)
+        binding.estimatedDiameterTitle.contentDescription=context?.getString(R.string.estimated_diameter_title)
+        binding.relativeVelocityTitle.contentDescription=context?.getString(R.string.relative_velocity_title)
+        binding.distanceFromEarthTitle.contentDescription=context?.getString(R.string.distance_from_earth_title)
+
         return binding.root
     }
 
