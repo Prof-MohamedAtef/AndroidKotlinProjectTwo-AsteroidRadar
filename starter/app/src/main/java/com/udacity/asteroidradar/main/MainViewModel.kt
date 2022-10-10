@@ -2,6 +2,7 @@ package com.udacity.asteroidradar.main
 
 import android.app.Application
 import android.util.Log
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -13,7 +14,7 @@ import com.udacity.asteroidradar.data.room.AsteroidsDatabase
 import com.udacity.asteroidradar.util.LoadingStatus
 import kotlinx.coroutines.launch
 
-class MainViewModel(application: Application) : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _asteroidsResponse= MutableLiveData<List<Asteroid>>()
     val asteroidResponse:LiveData<List<Asteroid>>
         get() = _asteroidsResponse

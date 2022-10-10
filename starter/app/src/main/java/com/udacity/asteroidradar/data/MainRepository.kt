@@ -18,11 +18,12 @@ class MainRepository (private val asteroidsDatabase: AsteroidsDatabase){
     suspend fun callAsteroidsApi(){
         try {
             withContext(Dispatchers.IO){
-                val picOfDay= AsteroidsWebService.WebCall.apiCall.getPicOfDay(BuildConfig.NasaApiKey)
+//                val picOfDay= AsteroidsWebService.WebCall.apiCall.getPicOfDay(BuildConfig.NasaApiKey)
+                val picOfDay= AsteroidsWebService.WebCall.apiCall.getPicOfDay()
                 val asteroidsResponse= AsteroidsWebService.WebCall.apiCall.getAsteroidsInSevenDays(
                     today,
                     sevenDaysLater,
-                    apiKey = BuildConfig.NasaApiKey
+//                    apiKey = BuildConfig.NasaApiKey
                 )
                 val asteroidsArr= parseAsteroidsJsonResult(JSONObject(asteroidsResponse))
                     .toTypedArray()

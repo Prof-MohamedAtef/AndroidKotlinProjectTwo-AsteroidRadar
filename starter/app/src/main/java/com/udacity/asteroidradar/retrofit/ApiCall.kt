@@ -12,12 +12,12 @@ interface ApiCall {
     suspend fun getAsteroidsInSevenDays(
         @Query("start_date") today:String,
         @Query("end_date") endDay:String,
-        @Query("api_key") apiKey:String
+//        @Query("api_key") apiKey:String
     ): String
 
     @ConverterFactory.MoshiConverter
     @GET("planetary/apod?")
     suspend fun getPicOfDay(
-        @Query("api_key") apiKey: String
+//        @Query("api_key") apiKey: String
     ): PictureOfDay
 }
