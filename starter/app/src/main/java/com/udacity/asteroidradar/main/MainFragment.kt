@@ -43,6 +43,10 @@ class MainFragment : Fragment() {
             findNavController().navigate(MainFragmentDirections.actionShowDetail(it))
         },null)
 
+        binding.activityMainImageOfTheDay.contentDescription=context?.getString(R.string.image_of_the_day)
+        binding.textView.contentDescription=context?.getString(R.string.image_of_the_day)
+        binding.tvProgressValue.contentDescription=context?.getString(R.string.tvProgressValue)
+
         setHasOptionsMenu(true)
 
         return binding.root

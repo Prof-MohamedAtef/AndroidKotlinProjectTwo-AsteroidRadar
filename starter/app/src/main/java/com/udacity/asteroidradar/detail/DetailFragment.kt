@@ -26,11 +26,16 @@ class DetailFragment : Fragment() {
 
         binding.activityMainImageOfTheDay.contentDescription=context?.getString(R.string.image_of_the_day)
         binding.closeApproachDateTitle.contentDescription=context?.getString(R.string.close_approach_data_title)
+        binding.closeApproachDate.contentDescription=context?.getString(R.string.close_approach_data)
         binding.absoluteMagnitudeTitle.contentDescription=context?.getString(R.string.absolute_magnitude_title)
+        binding.absoluteMagnitude.contentDescription=context?.getString(R.string.absolute_magnitude)
         binding.helpButton.contentDescription=context?.getString(R.string.help)
         binding.estimatedDiameterTitle.contentDescription=context?.getString(R.string.estimated_diameter_title)
+        binding.estimatedDiameter.contentDescription=context?.getString(R.string.estimated_diameter)
         binding.relativeVelocityTitle.contentDescription=context?.getString(R.string.relative_velocity_title)
+        binding.relativeVelocity.contentDescription=context?.getString(R.string.relative_velocity)
         binding.distanceFromEarthTitle.contentDescription=context?.getString(R.string.distance_from_earth_title)
+        binding.distanceFromEarth.contentDescription=context?.getString(R.string.distance_from_earth)
 
         return binding.root
     }

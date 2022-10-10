@@ -24,4 +24,10 @@
     <string name="is_normal">Not Hazardous</string>
     <string name="asteroid_safe">Asteroid is Safe</string>
     <string name="asteroid_hazardous">asteroid is hazardous</string>
+    <string name="tvProgressValue">Progress Value</string>
+    <string name="close_approach_data">close approach date value</string>
+    <string name="absolute_magnitude">Absolute Magnitude</string>
+    <string name="estimated_diameter">estimated diameter</string>
+    <string name="relative_velocity">relative velocity</string>
+    <string name="distance_from_earth">distance from earth</string>
 </resources>
