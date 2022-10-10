@@ -45,7 +45,7 @@
             app:layout_constraintTop_toTopOf="@id/tvCodeName"
             android:src="@drawable/asteroid_hazardous"
             statusIcon="@{asteroid.potentiallyHazardous}"
-            android:contentDescription="@{String.valueOf(asteroid.potentiallyHazardous)}"/>
+            android:contentDescription="@{asteroid.potentiallyHazardous?@string/potentially_hazardous_asteroid_image:@string/not_hazardous_asteroid_image}"/>
 
         <View
             android:layout_marginTop="15dp"
